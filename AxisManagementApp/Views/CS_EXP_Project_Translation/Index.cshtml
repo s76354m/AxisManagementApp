@@ -1,0 +1,125 @@
+﻿@model IEnumerable<AxisManagementApp.Models.CSEXPProjectTranslation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BenchmarkFileID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Analyst)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoLiveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxMileage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewMarket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvRef)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataLoadDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditMSID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NDB_LOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RefreshInd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BenchmarkFileID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Analyst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoLiveDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxMileage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewMarket)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvRef)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataLoadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditMSID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NDB_LOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefreshInd)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RecordID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RecordID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RecordID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

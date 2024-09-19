@@ -1,0 +1,89 @@
+@model IEnumerable<AxisManagementApp.Models.CompetitorTranslation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StrenuusProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataLoadDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditMSID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StrenuusProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataLoadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditMSID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RecordID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RecordID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RecordID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

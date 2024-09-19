@@ -1,0 +1,79 @@
+@model AxisManagementApp.Models.CompetitorTranslation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CompetitorTranslation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RecordID" />
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <input asp-for="ProjectID" class="form-control" />
+                <span asp-validation-for="ProjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectStatus" class="control-label"></label>
+                <input asp-for="ProjectStatus" class="form-control" />
+                <span asp-validation-for="ProjectStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StrenuusProductCode" class="control-label"></label>
+                <input asp-for="StrenuusProductCode" class="form-control" />
+                <span asp-validation-for="StrenuusProductCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Payor" class="control-label"></label>
+                <input asp-for="Payor" class="form-control" />
+                <span asp-validation-for="Payor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product" class="control-label"></label>
+                <input asp-for="Product" class="form-control" />
+                <span asp-validation-for="Product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EI" class="control-label"></label>
+                <input asp-for="EI" class="form-control" />
+                <span asp-validation-for="EI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CS" class="control-label"></label>
+                <input asp-for="CS" class="form-control" />
+                <span asp-validation-for="CS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MR" class="control-label"></label>
+                <input asp-for="MR" class="form-control" />
+                <span asp-validation-for="MR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataLoadDate" class="control-label"></label>
+                <input asp-for="DataLoadDate" class="form-control" />
+                <span asp-validation-for="DataLoadDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastEditMSID" class="control-label"></label>
+                <input asp-for="LastEditMSID" class="form-control" />
+                <span asp-validation-for="LastEditMSID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

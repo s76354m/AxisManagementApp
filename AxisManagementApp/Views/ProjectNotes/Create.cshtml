@@ -1,0 +1,73 @@
+@model AxisManagementApp.Models.ProjectNote
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ProjectNote</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <input asp-for="ProjectID" class="form-control" />
+                <span asp-validation-for="ProjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActionItem" class="control-label"></label>
+                <input asp-for="ActionItem" class="form-control" />
+                <span asp-validation-for="ActionItem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectStatus" class="control-label"></label>
+                <input asp-for="ProjectStatus" class="form-control" />
+                <span asp-validation-for="ProjectStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataLoadDate" class="control-label"></label>
+                <input asp-for="DataLoadDate" class="form-control" />
+                <span asp-validation-for="DataLoadDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastEditDate" class="control-label"></label>
+                <input asp-for="LastEditDate" class="form-control" />
+                <span asp-validation-for="LastEditDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrigNoteMSID" class="control-label"></label>
+                <input asp-for="OrigNoteMSID" class="form-control" />
+                <span asp-validation-for="OrigNoteMSID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastEditMSID" class="control-label"></label>
+                <input asp-for="LastEditMSID" class="form-control" />
+                <span asp-validation-for="LastEditMSID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectCategory" class="control-label"></label>
+                <input asp-for="ProjectCategory" class="form-control" />
+                <span asp-validation-for="ProjectCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
