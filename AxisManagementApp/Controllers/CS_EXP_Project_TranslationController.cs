@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AxisManagementApp.Models;
+using AxisManagementApp.ViewModels;
 
 namespace AxisManagementApp.Controllers
 {
@@ -24,44 +22,43 @@ namespace AxisManagementApp.Controllers
             return View(await _context.ProjectTranslations.ToListAsync());
         }
 
-        // GET: CS_EXP_Project_Translation/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cS_EXP_Project_Translation = await _context.ProjectTranslations
-                .FirstOrDefaultAsync(m => m.RecordID == id);
-            if (cS_EXP_Project_Translation == null)
-            {
-                return NotFound();
-            }
-
-            return View(cS_EXP_Project_Translation);
-        }
-
         // GET: CS_EXP_Project_Translation/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new NewProjectViewModel());
         }
 
         // POST: CS_EXP_Project_Translation/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RecordID,ProjectID,BenchmarkFileID,ProjectType,ProjectDesc,Analyst,PM,GoLiveDate,MaxMileage,Status,NewMarket,ProvRef,DataLoadDate,LastEditDate,LastEditMSID,NDB_LOB,RefreshInd")] CSEXPProjectTranslation cS_EXP_Project_Translation)
+        public async Task<IActionResult> Create(NewProjectViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cS_EXP_Project_Translation);
+                var projectTranslation = new CSEXPProjectTranslation
+                {
+                    ProjectID = viewModel.ProjectID,
+                    Analyst = viewModel.Analyst,
+                    State = viewModel.State,
+                    ProjectDesc = viewModel.ProjectDesc,
+                    Product = viewModel.Product,
+                    PM = viewModel.PM,
+                    Iteration = viewModel.Iteration,
+                    GoLiveDate = viewModel.GoLiveDate,
+                    MaxMileage = viewModel.MaxMileage,
+                    IsLimitedExpansionProject = viewModel.IsLimitedExpansionProject,
+                    ProjectType = viewModel.IsLimitedExpansionProject ? "L" : "F",
+                    Status = "New",
+                    DataLoadDate = DateTime.Now,
+                    LastEditDate = DateTime.Now,
+                    LastEditMSID = User.Identity.Name // Assuming you have user authentication
+                };
+
+                _context.Add(projectTranslation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cS_EXP_Project_Translation);
+            return View(viewModel);
         }
 
         // GET: CS_EXP_Project_Translation/Edit/5
@@ -72,36 +69,64 @@ namespace AxisManagementApp.Controllers
                 return NotFound();
             }
 
-            var cS_EXP_Project_Translation = await _context.ProjectTranslations.FindAsync(id);
-            if (cS_EXP_Project_Translation == null)
+            var projectTranslation = await _context.ProjectTranslations.FindAsync(id);
+            if (projectTranslation == null)
             {
                 return NotFound();
             }
-            return View(cS_EXP_Project_Translation);
+
+            var viewModel = new NewProjectViewModel
+            {
+                ProjectID = projectTranslation.ProjectID,
+                Analyst = projectTranslation.Analyst,
+                State = projectTranslation.State,
+                ProjectDesc = projectTranslation.ProjectDesc,
+                Product = projectTranslation.Product,
+                PM = projectTranslation.PM,
+                Iteration = projectTranslation.Iteration,
+                GoLiveDate = projectTranslation.GoLiveDate,
+                MaxMileage = projectTranslation.MaxMileage,
+                IsLimitedExpansionProject = projectTranslation.IsLimitedExpansionProject
+            };
+
+            return View(viewModel);
         }
 
         // POST: CS_EXP_Project_Translation/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RecordID,ProjectID,BenchmarkFileID,ProjectType,ProjectDesc,Analyst,PM,GoLiveDate,MaxMileage,Status,NewMarket,ProvRef,DataLoadDate,LastEditDate,LastEditMSID,NDB_LOB,RefreshInd")] CSEXPProjectTranslation cS_EXP_Project_Translation)
+        public async Task<IActionResult> Edit(int id, NewProjectViewModel viewModel)
         {
-            if (id != cS_EXP_Project_Translation.RecordID)
+            var projectTranslation = await _context.ProjectTranslations.FindAsync(id);
+            if (projectTranslation == null)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                projectTranslation.ProjectID = viewModel.ProjectID;
+                projectTranslation.Analyst = viewModel.Analyst;
+                projectTranslation.State = viewModel.State;
+                projectTranslation.ProjectDesc = viewModel.ProjectDesc;
+                projectTranslation.Product = viewModel.Product;
+                projectTranslation.PM = viewModel.PM;
+                projectTranslation.Iteration = viewModel.Iteration;
+                projectTranslation.GoLiveDate = viewModel.GoLiveDate;
+                projectTranslation.MaxMileage = viewModel.MaxMileage;
+                projectTranslation.IsLimitedExpansionProject = viewModel.IsLimitedExpansionProject;
+                projectTranslation.ProjectType = viewModel.IsLimitedExpansionProject ? "L" : "F";
+                projectTranslation.LastEditDate = DateTime.Now;
+                projectTranslation.LastEditMSID = User.Identity.Name;
+
                 try
                 {
-                    _context.Update(cS_EXP_Project_Translation);
+                    _context.Update(projectTranslation);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CS_EXP_Project_TranslationExists(cS_EXP_Project_Translation.RecordID))
+                    if (!CSEXPProjectTranslationExists(projectTranslation.RecordID))
                     {
                         return NotFound();
                     }
@@ -112,7 +137,7 @@ namespace AxisManagementApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cS_EXP_Project_Translation);
+            return View(viewModel);
         }
 
         // GET: CS_EXP_Project_Translation/Delete/5
@@ -123,14 +148,14 @@ namespace AxisManagementApp.Controllers
                 return NotFound();
             }
 
-            var cS_EXP_Project_Translation = await _context.ProjectTranslations
+            var projectTranslation = await _context.ProjectTranslations
                 .FirstOrDefaultAsync(m => m.RecordID == id);
-            if (cS_EXP_Project_Translation == null)
+            if (projectTranslation == null)
             {
                 return NotFound();
             }
 
-            return View(cS_EXP_Project_Translation);
+            return View(projectTranslation);
         }
 
         // POST: CS_EXP_Project_Translation/Delete/5
@@ -138,17 +163,13 @@ namespace AxisManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cS_EXP_Project_Translation = await _context.ProjectTranslations.FindAsync(id);
-            if (cS_EXP_Project_Translation != null)
-            {
-                _context.ProjectTranslations.Remove(cS_EXP_Project_Translation);
-            }
-
+            var projectTranslation = await _context.ProjectTranslations.FindAsync(id);
+            _context.ProjectTranslations.Remove(projectTranslation);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CS_EXP_Project_TranslationExists(int id)
+        private bool CSEXPProjectTranslationExists(int id)
         {
             return _context.ProjectTranslations.Any(e => e.RecordID == id);
         }

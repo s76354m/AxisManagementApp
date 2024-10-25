@@ -1,0 +1,48 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace AxisManagementApp.ViewModels
+{
+    public class NewProjectViewModel
+    {
+        [Required]
+        [Display(Name = "New Project ID")]
+        public string ProjectID { get; set; }
+
+        [Required]
+        [Display(Name = "Analyst")]
+        public string Analyst { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [Display(Name = "Project Description")]
+        public string ProjectDesc { get; set; }
+
+        [Required]
+        [Display(Name = "Product")]
+        public string Product { get; set; }
+
+        [Required]
+        [Display(Name = "Project Manager")]
+        public string PM { get; set; }
+
+        [Required]
+        [Display(Name = "Iteration")]
+        public int Iteration { get; set; }
+
+        [Required]
+        [Display(Name = "GoLive Date")]
+        [DataType(DataType.Date)]
+        public DateTime GoLiveDate { get; set; }
+
+        [Required]
+        [Display(Name = "Mileage")]
+        public int MaxMileage { get; set; }
+
+        [Display(Name = "Limited Expansion Project (Network Growth)")]
+        public bool IsLimitedExpansionProject { get; set; }
+    }
+}
